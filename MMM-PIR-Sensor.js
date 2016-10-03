@@ -7,36 +7,57 @@
  * MIT Licensed.
  */
 
-Module.register('MMM-PIR-Sensor',{
+Module.register('MMM-PIR-Sensor', {
 
-	defaults: {
-		sensorPIN: 22,
-		relayPIN: false,
-		powerSaving: true,
-		relayOnState: 1,
-	},
+    /**
+     * Default Config
+     */
+    defaults: {
+        sensorGpio:          25,    // This is the GPIO port number, not the header pin number
+        relayGpio:           false, // This is the GPIO port number, not the header pin number
+        powerSaving:         true,
+        relayOnState:        1,
+        relayOffState:       0,
+        turnOffAfterSeconds: 30,
+        debug:               false
+    },
 
-	// Override socket notification handler.
-	socketNotificationReceived: function(notification, payload) {
-		if (notification === "USER_PRESENCE"){
-			this.sendNotification(notification, payload)
-		}
-	},
+    /**
+     * Socket Notification Received
+     *
+     * @param {String}  notification
+     * @param {*}       payload
+     */
+    socketNotificationReceived: function(notification, payload) {
+        if (notification === 'USER_PRESENCE') {
+            this.sendNotification(notification, payload)
+        }
+    },
 
-	notificationReceived: function(notification, payload) {
-		if (notification === "SCREEN_WAKEUP"){
-			this.sendNotification(notification, payload)
-		}
-	},
+    /**
+     * Notification Received from other modules
+     *
+     * @param {String} notification
+     * @param {*}      payload
+     */
+    notificationReceived: function(notification, payload) {
+        if (notification === 'SCREEN_WAKEUP') {
+            this.sendNotification(notification, payload)
+        }
+    },
 
-	start: function() {
-		if (this.config.relayOnState == 1){
-			this.config.relayOffState = 0
-		}
-		else if (this.config.relayOnState == 0){
-			this.config.relayOffState = 1
-		}
-		this.sendSocketNotification('CONFIG', this.config);
-		Log.info('Starting module: ' + this.name);
-	}
+    /**
+     * Module Start
+     */
+    start: function() {
+        if (this.config.relayOnState === 1) {
+            this.config.relayOffState = 0;
+        } else {
+            this.config.relayOffState = 1;
+            this.config.relayOnState  = 0;
+        }
+
+        this.sendSocketNotification('CONFIG', this.config);
+        Log.info('Starting module: ' + this.name);
+    }
 });
