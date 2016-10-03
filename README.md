@@ -68,6 +68,13 @@ The following properties can be configured:
 			</td>
 		</tr>
 		<tr>
+			<td><code>turnOffAfterSeconds</code></td>
+			<td>Turn the monitor off x seconds after motion is no longer detected<br>
+				<br><b>Possible values:</b> <code>int</code>
+				<br><b>Default value:</b> <code>30</code>
+			</td>
+		</tr>
+		<tr>
 			<td><code>debug</code></td>
 			<td>Enable to display more PIR debug messages in console<br>
 				<br><b>Possible values:</b> <code>bool</code>
