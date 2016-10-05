@@ -102,6 +102,7 @@ module.exports = NodeHelper.create({
         });
 
         process.on('SIGINT', () => {
+            this.log('Unexporting PIR Gpio', true);
             this.pir.unexport();
         });
     },
@@ -178,5 +179,4 @@ module.exports = NodeHelper.create({
             console.log('[MMM-PIR] [' + moment().format('YYYY-MM-DD HH:mm:ss') + '] ' + message);
         }
     }
-
 });
