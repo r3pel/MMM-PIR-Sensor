@@ -30,6 +30,7 @@ Module.register('MMM-PIR-Sensor', {
      */
     socketNotificationReceived: function(notification, payload) {
         if (notification === 'USER_PRESENCE') {
+            Log.info('[MMM-PIR] USER_PRESENCE: ' + (payload ? 'TRUE' : 'FALSE'));
             this.sendNotification(notification, payload)
         }
     },
