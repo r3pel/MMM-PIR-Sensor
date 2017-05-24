@@ -14,7 +14,7 @@ const moment     = require('moment');
 
 module.exports = NodeHelper.create({
 
-    loaded:       false,
+    isLoaded:     false,
     config:       null,
     pir:          null,
     relay:        null,
@@ -38,7 +38,7 @@ module.exports = NodeHelper.create({
      * @param {Object} config
      */
     initConfig: function (config) {
-        if (!this.loaded) {
+        if (!this.isLoaded) {
             this.config = config;
 
             if (typeof this.config.sensorGpio === 'undefined') {
@@ -58,7 +58,7 @@ module.exports = NodeHelper.create({
             }
 
             this.watch();
-            this.loaded = true;
+            this.isLoaded = true;
         }
     },
 
