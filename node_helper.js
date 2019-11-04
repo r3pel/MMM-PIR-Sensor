@@ -154,7 +154,7 @@ module.exports = NodeHelper.create({
      */
     _executeHdmiOn: function () {
         this.log('Executing tvservice ON', true);
-        exec('/opt/vc/bin/tvservice --preferred && sudo chvt 6 && sudo chvt 7', null);
+        exec('/opt/vc/bin/vcgencmd display_power 1', null);
     },
 
     /**
@@ -164,7 +164,7 @@ module.exports = NodeHelper.create({
      */
     _executeHdmiOff: function () {
         this.log('Executing tvservice OFF', true);
-        exec('/opt/vc/bin/tvservice -o', null);
+        exec('/opt/vc/bin/vcgencmd display_power 0', null);
     },
 
     /**
